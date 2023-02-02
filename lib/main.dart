@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gim_tracker/src/screens/homePage.dart';
+import 'package:flutter/services.dart';
+import 'package:gim_tracker/src/screens/myApp.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarIconBrightness: Brightness.light,
+    statusBarColor: Color.fromRGBO(0, 0, 0, 0),
+  ));
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Gym Tracker',
-      initialRoute: '/',
-      routes: {
-        '/': (context) => HomePage(),
-      },
-    );
-  }
+  runApp(const MyApp());
 }
