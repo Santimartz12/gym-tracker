@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gim_tracker/src/screens/editCalendar.dart';
 import 'package:gim_tracker/src/screens/homePage.dart';
 
 class MyApp extends StatelessWidget {
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomePage(),
+        '/editCalendar': (context) => EditCalendar(),
       },
     );
   }

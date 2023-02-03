@@ -84,6 +84,9 @@ flutter:
         - asset: assets/fonts/Montserrat-Medium.ttf
         - asset: assets/fonts/Montserrat-Bold.ttf
           weight: 700
+        - asset: assets/fonts/Montserrat-BoldItalic.ttf
+          weight: 700
+          style: italic                  
         - asset: assets/fonts/Montserrat-MediumItalic.ttf
           style: italic
   # fonts:

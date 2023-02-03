@@ -3,7 +3,7 @@ import 'package:gim_tracker/src/styles/colorsApp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DailyTraining extends StatefulWidget {
-  DailyTraining({
+  const DailyTraining({
     Key? key,
   }) : super(key: key);
 
@@ -17,6 +17,18 @@ Future<bool> getSavedValue() async {
 }
 
 class _DailyTrainingState extends State<DailyTraining> {
+  List<String> trainingDate = [
+    'Pecho y Triceps',
+    'Espalda y Biceps',
+    'Piernita',
+    'Hombros',
+    'Pecho y Biceps',
+    'Isquios y glúteos',
+    'Descanso'
+  ];
+
+  var weekDay = DateTime.now().weekday;
+
   final colorsApp = ColorsApp();
 
   bool done = false;
@@ -66,7 +78,7 @@ class _DailyTrainingState extends State<DailyTraining> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 130,
                     child: Text(
-                      'Espalda y Biceps',
+                      trainingDate[weekDay - 1],
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 35,
@@ -76,6 +88,18 @@ class _DailyTrainingState extends State<DailyTraining> {
                       ),
                     ),
                   ),
+                  done
+                      ? Text(
+                          'Completado',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.italic,
+                            fontSize: 14.5,
+                            height: 1.7,
+                            color: colorsApp.fontsDarkColor,
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ),
@@ -116,7 +140,9 @@ class _DailyTrainingState extends State<DailyTraining> {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/editCalendar');
+                      },
                       icon: const Icon(Icons.calendar_month),
                       iconSize: 36,
                       style: const ButtonStyle(
