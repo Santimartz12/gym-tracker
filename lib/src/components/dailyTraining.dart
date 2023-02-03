@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gim_tracker/src/styles/colorsApp.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DailyTraining extends StatefulWidget {
   DailyTraining({
@@ -10,10 +11,25 @@ class DailyTraining extends StatefulWidget {
   State<DailyTraining> createState() => _DailyTrainingState();
 }
 
+Future<bool> getSavedValue() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getBool('dayDone') ?? false;
+}
+
 class _DailyTrainingState extends State<DailyTraining> {
   final colorsApp = ColorsApp();
 
-  var done = false;
+  bool done = false;
+
+  @override
+  void initState() {
+    super.initState();
+    getSavedValue().then((value) {
+      setState(() {
+        done = value;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +66,7 @@ class _DailyTrainingState extends State<DailyTraining> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 130,
                     child: Text(
-                      'Brazo y antebrazo',
+                      'Espalda y Biceps',
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 35,
@@ -87,9 +103,7 @@ class _DailyTrainingState extends State<DailyTraining> {
                     ),
                     IconButton(
                       onPressed: () {
-                        setState(() {
-                          done = !done;
-                        });
+                        markAsDone();
                       },
                       icon: done
                           ? Icon(Icons.cancel_outlined)
@@ -119,5 +133,14 @@ class _DailyTrainingState extends State<DailyTraining> {
         ),
       ),
     );
+  }
+
+  markAsDone() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('dayDone', !done);
+
+    setState(() {
+      done = !done;
+    });
   }
 }

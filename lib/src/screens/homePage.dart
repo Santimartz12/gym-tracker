@@ -26,7 +26,6 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 115,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(24, 42, 24, 24),
               child: Column(
