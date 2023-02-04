@@ -55,13 +55,17 @@ class CalendarDay extends StatelessWidget {
                     children: [
                       Text(
                         nameDay,
-                        style: TextStyle(height: 1),
+                        style: TextStyle(
+                          height: 1,
+                          color: colorsApp.fontsDarkColor,
+                        ),
                       ),
                       FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
                           trainingDay,
                           style: TextStyle(
+                            color: colorsApp.fontsDarkColor,
                             fontSize: 23,
                             height: 1,
                             fontWeight: FontWeight.w700,

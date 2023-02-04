@@ -17,7 +17,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final dataInicial = {
       'nombre': 'Santiagangas',
-      'apellido': 'Martinez',
     };
 
     return Scaffold(
