@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gim_tracker/src/styles/colorsApp.dart';
+import 'package:gim_tracker/src/providers/user_services.dart';
+import 'package:gim_tracker/src/themes/colorsApp.dart';
 
-import '../components/dailyTraining.dart';
+import '../widgets/dailyTraining.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,9 +16,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final dataInicial = {
-      'nombre': 'Santiagangas',
-    };
+    final userName = UserServices().getName();
 
     return Scaffold(
       backgroundColor: colorsApp.backgroundColor,
@@ -31,7 +30,7 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '¡Hola ${dataInicial['nombre']!}!',
+                    '¡Hola ${userName}!',
                     style: TextStyle(
                       color: colorsApp.fontsLightColor,
                       fontSize: 18,
@@ -50,7 +49,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          DailyTraining(),
+          const DailyTraining(),
         ],
       ),
     );

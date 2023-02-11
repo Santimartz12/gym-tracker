@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gim_tracker/src/styles/colorsApp.dart';
+import 'package:gim_tracker/src/providers/calendar_services.dart';
+import 'package:gim_tracker/src/themes/colorsApp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DailyTraining extends StatefulWidget {
@@ -17,15 +18,7 @@ Future<bool> getSavedValue() async {
 }
 
 class _DailyTrainingState extends State<DailyTraining> {
-  List<String> trainingDate = [
-    'Pecho y Triceps',
-    'Espalda y Biceps',
-    'Piernita',
-    'Hombros',
-    'Pecho y Biceps',
-    'Isquios y glúteos',
-    'Descanso'
-  ];
+  List<String> trainingDate = CalendarServices().calendar;
 
   var weekDay = DateTime.now().weekday;
 

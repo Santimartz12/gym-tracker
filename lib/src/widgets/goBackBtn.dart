@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gim_tracker/src/styles/colorsApp.dart';
+import 'package:gim_tracker/src/themes/colorsApp.dart';
 
 class GoBackBtn extends StatelessWidget {
   GoBackBtn({

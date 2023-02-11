@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:gim_tracker/src/styles/colorsApp.dart';
+import 'package:gim_tracker/src/providers/calendar_services.dart';
+import 'package:gim_tracker/src/themes/colorsApp.dart';
 
 class CalendarDay extends StatelessWidget {
-  CalendarDay({
-    Key? key,
-    required this.nameDay,
-    required this.trainingDay,
-  }) : super(key: key);
+  CalendarDay({Key? key, required this.indexDay}) : super(key: key);
 
+  final days = CalendarServices().days;
+  final exercises = CalendarServices().calendar;
   final colorsApp = ColorsApp();
-
-  final String nameDay;
-  final String trainingDay;
+  final int indexDay;
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +18,18 @@ class CalendarDay extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              print(trainingDay);
+              print(indexDay);
             },
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   bottomLeft: Radius.circular(10),
                 ),
                 color: colorsApp.lightColor,
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Icon(Icons.edit_outlined),
               ),
               height: double.infinity,
@@ -41,7 +38,7 @@ class CalendarDay extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(10),
                   bottomRight: Radius.circular(10),
                 ),
@@ -54,7 +51,7 @@ class CalendarDay extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        nameDay,
+                        days[indexDay],
                         style: TextStyle(
                           height: 1,
                           color: colorsApp.fontsDarkColor,
@@ -63,7 +60,7 @@ class CalendarDay extends StatelessWidget {
                       FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          trainingDay,
+                          exercises[indexDay],
                           style: TextStyle(
                             color: colorsApp.fontsDarkColor,
                             fontSize: 23,
