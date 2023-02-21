@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gim_tracker/src/providers/calendar_services.dart';
+import 'package:gim_tracker/src/providers/calendar_provider.dart';
 import 'package:gim_tracker/src/themes/colorsApp.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DailyTraining extends StatefulWidget {
@@ -18,8 +19,6 @@ Future<bool> getSavedValue() async {
 }
 
 class _DailyTrainingState extends State<DailyTraining> {
-  List<String> trainingDate = CalendarServices().calendar;
-
   var weekDay = DateTime.now().weekday;
 
   final colorsApp = ColorsApp();
@@ -38,6 +37,16 @@ class _DailyTrainingState extends State<DailyTraining> {
 
   @override
   Widget build(BuildContext context) {
+    final calendarProvider = Provider.of<CalendarProvider>(context);
+    final calendar = calendarProvider.calendar;
+    //* Estilo de los iconos
+    const buttonStyle = ButtonStyle(
+      padding: MaterialStatePropertyAll(
+        EdgeInsets.all(5),
+      ),
+      iconColor: MaterialStatePropertyAll(Colors.black),
+    );
+
     return Center(
       child: AnimatedContainer(
         decoration: BoxDecoration(
@@ -71,7 +80,7 @@ class _DailyTrainingState extends State<DailyTraining> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 130,
                     child: Text(
-                      trainingDate[weekDay - 1],
+                      calendar[weekDay - 1],
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 35,
@@ -113,10 +122,7 @@ class _DailyTrainingState extends State<DailyTraining> {
                       onPressed: () {},
                       icon: Icon(Icons.cached),
                       iconSize: 36,
-                      style: const ButtonStyle(
-                          padding: MaterialStatePropertyAll(
-                        EdgeInsets.all(5),
-                      )),
+                      style: buttonStyle,
                     ),
                     IconButton(
                       onPressed: () {
@@ -126,23 +132,15 @@ class _DailyTrainingState extends State<DailyTraining> {
                           ? Icon(Icons.cancel_outlined)
                           : Icon(Icons.task_alt_rounded),
                       iconSize: 48,
-                      style: const ButtonStyle(
-                        padding: MaterialStatePropertyAll(
-                          EdgeInsets.all(5),
-                        ),
-                      ),
+                      style: buttonStyle,
                     ),
                     IconButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/editCalendar');
+                        Navigator.pushNamed(context, 'editCalendar');
                       },
-                      icon: const Icon(Icons.calendar_month),
+                      icon: const Icon(Icons.calendar_month_outlined),
                       iconSize: 36,
-                      style: const ButtonStyle(
-                        padding: MaterialStatePropertyAll(
-                          EdgeInsets.all(5),
-                        ),
-                      ),
+                      style: buttonStyle,
                     ),
                   ],
                 ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gim_tracker/src/providers/calendar_services.dart';
+
 import 'package:gim_tracker/src/widgets/titulo.dart';
 import 'package:gim_tracker/src/themes/colorsApp.dart';
 
@@ -15,12 +15,8 @@ class EditCalendar extends StatelessWidget {
     Navigator.pop(context);
   }
 
-  List<String> trainingDate = CalendarServices().calendar;
-
   @override
   Widget build(BuildContext context) {
-    var date = DateTime.now().weekday;
-
     final colorsApp = ColorsApp();
 
     return Scaffold(
@@ -55,8 +51,7 @@ class EditCalendar extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                 child: Center(
                   child: PrimaryBtnApp(
-                    //If this button starts to fail, check this. I don't understand how it works lol
-                    method: saveCalendarData,
+                    callback: () => saveCalendarData(context),
                     textValue: 'Guardar cambios',
                   ),
                 ),

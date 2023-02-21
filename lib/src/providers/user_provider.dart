@@ -1,4 +1,4 @@
-class UserServices {
+class UserProvider {
   String? _name = 'Santiagangas';
 
   getName() {

@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:gim_tracker/src/providers/calendar_services.dart';
+import 'package:gim_tracker/src/providers/calendar_provider.dart';
 import 'package:gim_tracker/src/themes/colorsApp.dart';
+import 'package:provider/provider.dart';
 
 class CalendarDay extends StatelessWidget {
   CalendarDay({Key? key, required this.indexDay}) : super(key: key);
 
-  final days = CalendarServices().days;
-  final exercises = CalendarServices().calendar;
+  final days = CalendarProvider().days;
   final colorsApp = ColorsApp();
   final int indexDay;
 
   @override
   Widget build(BuildContext context) {
+    final calendarProvider = Provider.of<CalendarProvider>(context);
+    final calendar = calendarProvider.calendar;
     return Container(
       height: 60,
       child: Row(
         children: [
           GestureDetector(
             onTap: () {
-              print(indexDay);
+              //todo Abrir un input que le permita al usuario cambiar personalizadamente
+              calendarProvider.changeDay(indexDay, 'Antebrazo GOD');
             },
             child: Container(
               decoration: BoxDecoration(
@@ -28,11 +31,11 @@ class CalendarDay extends StatelessWidget {
                 ),
                 color: colorsApp.lightColor,
               ),
-              child: Padding(
+              height: double.infinity,
+              child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Icon(Icons.edit_outlined),
               ),
-              height: double.infinity,
             ),
           ),
           Expanded(
@@ -60,7 +63,7 @@ class CalendarDay extends StatelessWidget {
                       FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          exercises[indexDay],
+                          calendar[indexDay],
                           style: TextStyle(
                             color: colorsApp.fontsDarkColor,
                             fontSize: 23,
